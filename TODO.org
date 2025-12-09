@@ -1,0 +1,17 @@
+#+TITLE: Nombre del Proyecto
+#+AUTHOR: Fénix
+#+DATE: [2025-12-09]
+#+EMAIL: fenix@librebits.info
+#+FILETAGS: :proyecto:desarrollo:
+
+#+TODO: TODO DOING FAILS | DONE | DEPRECATED
+#+STARTUP: overview
+#+STARTUP: hidestars
+
+
+* DOING Get temp geodata .osm format strategy :
+** FAILS Overpass-api fails in both : <- DEPRECATED , forget about this option
+*** FAILS curl -s "https://overpass-api... "
+*** FAILS on their website
+
+* From the above temporary geodata format ... -> get a SVG basemap of the given central america region (including Mexico, Guatemala, and belize).

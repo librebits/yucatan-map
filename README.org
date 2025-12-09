@@ -1,0 +1,65 @@
+* Project Structure
+
+#+begin_src markdown
+```
+Yucatan-map/
+├── yucatan.svg                   # Base SVG map (corrected viewBox for full list of relevant locations view )
+├── Yucatan-locations-geojson.json   # City coordinates (GeoJSON format with lat/lng)
+├── index.html                    # YUCATAN1 (Western Route) page
+├── map.js                        # YUCATAN1 implementation
+├── index2.html                   # YUCATAN2 (West to East) page
+├── map2.js                       # YUCATAN2 implementation
+├── README.org                    # This file
+├── TODO.org                      # Task tracking
+├── CLAUDE.md                     # Project instructions for Claude Code
+└── Screenshots/                  # Visual documentation
+```
+#+end_src
+
+* Development Setup
+
+** Browser-sync (auto-reload with Org Babel async)
+
+Start development server with async execution (non-blocking):
+
+#+begin_src bash :dir /home/fenix/Yucatan-map :async
+npx browser-sync start --server --files "*.html,*.js,*.svg,*.json" --no-notify --port 3000
+#+end_src
+
+*** How to use
+1. Place cursor in code block above
+2. Press =C-c C-c= to execute
+3. Emacs remains responsive (async execution via =ob-async= package)
+4. Output appears in results block when ready
+
+*** Access URLs
+- YUCATAN: http://localhost:3000/index.html
+- Dashboard: http://localhost:3001
+
+*** Features
+- ✅ Auto-reload on file save
+- ✅ Non-blocking (Emacs stays responsive)
+- ✅ Watches: =*.html=, =*.js=, =*.svg=, =*.json=
+- ✅ UI dashboard at port 3001
+
+*** Stop server
+- Find process: =ps aux | grep browser-sync=
+- Kill: =kill <PID>=
+- Or use: =M-x list-processes= → mark → =d= (delete)
+
+** Alternative: Terminal execution
+
+If you prefer external terminal:
+#+begin_src bash :dir /home/fenix/Yucatan-map
+npx browser-sync start --server --files "*.html,*.js,*.svg,*.json" --no-notify --port 3000
+#+end_src
+
+Or use Emacs async shell command:
+- =M-&= (async-shell-command)
+- Type the command above
+- Output goes to =*Async Shell Command*= buffer
+
+** Manual testing
+Open files directly in browser or use =Ctrl+Shift+R= for hard reload.
+
+
