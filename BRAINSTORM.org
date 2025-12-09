@@ -1,0 +1,89 @@
+#+TITLE: Brainstorm - Overpass API Alternative Solutions
+#+AUTHOR: Fénix & Claude
+#+DATE: [2025-12-09]
+#+EMAIL: fenix@librebits.info
+#+FILETAGS: :brainstorm:geodata:solutions:
+
+* Problem Statement
+
+Overpass API is failing to provide geodata for Yucatan Peninsula region due to:
+- Bounding box too large (~1000km × ~800km covering Mexico+Guatemala+Belize)
+- Server timeouts: "The server is probably too busy to handle your request"
+- Designed for city-level queries, not multi-country regions
+
+* ULTRATHINK Analysis
+
+** First Assumption
+Trying to get base map geodata for large Yucatan Peninsula region but Overpass API times out because bounding box is too big for their free tier. Need simple SVG basemap to overlay 15 tourist location markers.
+
+** Think Once... *inhale/exhale*
+Real question: Do we actually NEED full OSM complexity? For educational map with 15 markers, only need coastlines + borders, not every road/building OSM provides.
+
+** Think Twice... *inhale/exhale*
+Issue is scale - bbox covers ~1000km × ~800km area. Overpass designed for city-level queries, not multi-country regions.
+
+** Think Thrice... *inhale/exhale*
+KISS solution: Use Natural Earth Data - specifically designed for regional/world overview maps. Aligns perfectly with educational + vanilla JS philosophy.
+
+* Solution Options (Ranked by Simplicity)
+
+** Option 1: Natural Earth Data ⭐ RECOMMENDED - CHOSEN
+
+#+begin_src bash
+# Download simplified 1:50m cultural boundaries (small file, perfect for scale)
+wget https://naciscdn.org/naturalearth/50m/cultural/ne_50m_admin_0_countries.zip
+unzip ne_50m_admin_0_countries.zip
+
+# Convert to GeoJSON, filter countries, then to SVG
+ogr2ogr -f GeoJSON -where "ADMIN IN ('Mexico','Guatemala','Belize')" \
+  yucatan.geojson ne_50m_admin_0_countries.shp \
+  -clipsrc -93.0 14.0 -86.0 21.5
+#+end_src
+
+*** Why This Works
+- ✅ Pre-simplified for regional scale
+- ✅ Fast download (few MB)
+- ✅ Clean, educational-quality rendering
+- ✅ Standard GIS tools (ogr2ogr from GDAL package)
+- ✅ Perfect for teaching/learning context
+- ✅ Aligns with KISS principle
+
+** Option 2: Geofabrik OSM Extracts
+
+#+begin_src bash
+# Download pre-processed regional extracts (much smaller than Overpass query)
+wget https://download.geofabrik.de/north-america/mexico-latest.osm.pbf
+wget https://download.geofabrik.de/central-america-latest.osm.pbf
+
+# Extract just boundaries with osmium
+osmium extract -b -93.0,14.0,-86.0,21.5 mexico-latest.osm.pbf -o yucatan.osm
+#+end_src
+
+** Option 3: Simple Manual SVG ⚡ FASTEST
+
+Generate simplified SVG polygon based on approximate coastline coordinates.
+Takes 5 minutes vs hours fighting with APIs.
+
+For teaching purposes (didáctico), this is brilliant because:
+- Shows students you don't need complex tools for simple needs
+- Demonstrates KISS principle in action
+- Gets working code in 10 minutes vs 2 hours debugging APIs
+- Easier to explain and modify
+
+** Option 4: Use Existing SVG + Modify
+
+Already have ~Base-map/File:Puuc_Map.svg~ - could:
+1. Extract its viewBox/paths
+2. Extend boundaries to cover full region
+3. Add 15 markers
+
+* Decision
+
+Going with **Option 1: Natural Earth Data**
+
+Best balance of:
+- Simplicity
+- Educational value
+- Professional quality
+- KISS principle adherence
+- Standard tools (GDAL/ogr2ogr)
