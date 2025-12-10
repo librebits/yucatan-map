@@ -1,3 +1,65 @@
+#+TITLE: Nombre del Proyecto
+#+AUTHOR: Fénix
+#+DATE: [2025-12-09]
+#+EMAIL: fenix@librebits.info
+#+FILETAGS: :proyecto:desarrollo:
+
+#+TODO: REDPOINT PATH | DONE
+#+STARTUP: overview
+#+STARTUP: hidestars
+
+
+* YUCATAN (MEXICO, GUATEMALA, BELIZE, MEXICO)
+
+
+START TRIP:
+
+** PATH Cancun ->
+
+** PATH ->  Merida
+
+** PATH ->  Chichen Itza
+
+** PATH ->  Palenque
+
+** PATH ->  San Cristobal
+
+** PATH ->  Panajachel
+
+** PATH ->  Antigua
+
+** PATH ->  Chichicastenango
+
+** PATH ->  Guatemala Airport,
+     (flight ** ->  Flores (SO AIRPLANE IMAGE))
+
+** PATH ->  Flores
+
+** PATH ->  Tikal
+
+** PATH ->  Belize City
+
+** REDPOINT ->  Caye Caulker (boat ** ->  key Caye Caulker (SO WATERTAXI SMALL BOAT IMAGE))
+
+** ->  Belize City (Watertaxi ** ->  Belize City)
+
+** REDPOINT ->  Bacalar, going back ** ->  Mexico.
+
+** REDPOINT ->  Playa del Carmen.
+
+** REDPOINT ->  Cancun
+
+END TRIP
+
+** Status: IN PROGRESS (coordinate calibration needed ?)
+** Route
+** Current Issues
+** Cities
+** Files
+** Access
+
+
+
 * Project Structure
 
 #+begin_src markdown
